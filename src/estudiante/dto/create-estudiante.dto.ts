@@ -1,7 +1,6 @@
 import { IsString, IsNotEmpty, IsEnum, IsOptional, IsInt } from 'class-validator';
-import { RolUsuario } from '../../common/role.enum'; // Ajusta la ruta si es necesario
-
 export class CreateEstudianteDto {
+
   @IsInt()
   @IsNotEmpty()
   cedula: number;
@@ -10,27 +9,23 @@ export class CreateEstudianteDto {
   @IsNotEmpty()
   nombre: string;
 
-  @IsOptional()
-  @IsString()
-  grupoInvestigacion?: string;
-
-  @IsOptional()
-  @IsInt()
-  numeroExtension?: number;
-
-  @IsEnum(RolUsuario)
   @IsNotEmpty()
-  rol: RolUsuario;
+  @IsString()
+  correo: string;
 
-  @IsOptional()
+  @IsNotEmpty()
+  @IsString()
+  programa: string;
+
+  @IsNotEmpty()
   @IsInt()
-  jefeId?: number; 
+  semestre: number;
 
   @IsOptional()
   @IsInt({ each: true })
-  claseIds?: number[];  
+  actividadesids?: number[];  
 
   @IsOptional()
   @IsInt({ each: true })
-  bonoIds?: number[]; 
+  resenasids?: number[]; 
 }

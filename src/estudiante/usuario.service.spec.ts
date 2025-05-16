@@ -1,17 +1,17 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { UsuarioService } from './usuario.service';
+import { EstudianteService } from './estudiante.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { BadRequestException } from '@nestjs/common';
-import { Usuario } from './entities/usuario.entity';
+import { Estudiante } from './entities/estudiante.entity';
 import { RolUsuario } from 'src/common/role.enum';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 
 describe('UsuarioService', () => {
-  let service: UsuarioService;
-  let repository: Repository<Usuario>;
+  let service: EstudianteService;
+  let repository: Repository<Estudiante>;
 
-  const mockJefe: Usuario = {
+  const mockJefe: Estudiante = {
     id: 2,
     cedula: 9876543210,
     nombre: 'Jefe User',
@@ -22,7 +22,7 @@ describe('UsuarioService', () => {
     bonos: [],
   };
 
-  const mockUsuarioProfesor: Usuario = {
+  const mockUsuarioProfesor: Estudiante = {
     id: 1,
     cedula: 1234567890,
     nombre: 'Test User Profesor',
@@ -34,7 +34,7 @@ describe('UsuarioService', () => {
     bonos: [],
   };
 
-  const mockUsuarioDecana: Usuario = {
+  const mockUsuarioDecana: Estudiante = {
     id: 3,
     cedula: 1122334455,
     nombre: 'Test User Decana',
@@ -46,7 +46,7 @@ describe('UsuarioService', () => {
     bonos: [],
   };
 
-  const mockUsuarioProfesorWithBonos: Usuario = {
+  const mockUsuarioProfesorWithBonos: Estudiante = {
     id: 4,
     cedula: 5566778899,
     nombre: 'Test User With Bonos',
@@ -62,16 +62,16 @@ describe('UsuarioService', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
-        UsuarioService,
+        EstudianteService,
         {
-          provide: getRepositoryToken(Usuario),
+          provide: getRepositoryToken(Estudiante),
           useClass: Repository,
         },
       ],
     }).compile();
 
-    service = module.get<UsuarioService>(UsuarioService);
-    repository = module.get<Repository<Usuario>>(getRepositoryToken(Usuario));
+    service = module.get<EstudianteService>(EstudianteService);
+    repository = module.get<Repository<Estudiante>>(getRepositoryToken(Estudiante));
   });
 
   it('should be defined', () => {
@@ -87,7 +87,7 @@ describe('UsuarioService', () => {
         grupoInvestigacion: 'TICSW',
         numeroExtension: 12345678,
       };
-      const expectedUsuario: Usuario = {
+      const expectedUsuario: Estudiante = {
         id: 5,
         ...createUsuarioDto,
         jefe: mockJefe,
@@ -144,7 +144,7 @@ describe('UsuarioService', () => {
       const userId = 1;
       jest.spyOn(repository, 'findOne').mockResolvedValue(mockUsuarioProfesor);
 
-      const result = await service.findUsuarioById(userId);
+      const result = await service.findEstudianteById(userId);
       expect(result).toEqual(mockUsuarioProfesor);
       expect(repository.findOne).toHaveBeenCalledWith({ where: { id: userId } });
     });
@@ -153,7 +153,7 @@ describe('UsuarioService', () => {
       const userId = 99;
       jest.spyOn(repository, 'findOne').mockResolvedValue(null);
 
-      const result = await service.findUsuarioById(userId);
+      const result = await service.findEstudianteById(userId);
       expect(result).toBeNull();
       expect(repository.findOne).toHaveBeenCalledWith({ where: { id: userId } });
     });

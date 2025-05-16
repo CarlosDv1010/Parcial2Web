@@ -1,25 +1,25 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Bono } from './entities/bono.entity';
-import { UsuarioService } from 'src/estudiante/usuario.service';
-import { CreateBonoDto } from './dto/create-bono.dto';
+import { Resena } from './entities/resena.entity';
+import { EstudianteService } from 'src/estudiante/estudiante.service';
+import { CreateBonoDto } from './dto/create-resena.dto';
 import { RolUsuario } from 'src/common/role.enum';
 
 @Injectable()
 export class BonoService {
   constructor(
-    @InjectRepository(Bono)
-    private bonoRepository: Repository<Bono>,
-    private usuarioService: UsuarioService,
+    @InjectRepository(Resena)
+    private bonoRepository: Repository<Resena>,
+    private usuarioService: EstudianteService,
   ) {}
 
-  async crearBono(createBonoDto: CreateBonoDto): Promise<Bono> {
+  async crearBono(createBonoDto: CreateBonoDto): Promise<Resena> {
     if (!createBonoDto.monto || createBonoDto.monto <= 0) {
       throw new BadRequestException('El monto del bono debe ser positivo.');
     }
 
-    const usuario = await this.usuarioService.findUsuarioById(
+    const usuario = await this.usuarioService.findEstudianteById(
       createBonoDto.usuarioId,
     );
 
@@ -37,11 +37,11 @@ export class BonoService {
     return this.bonoRepository.save(nuevoBono);
   }
 
-  async findBonoByCodigo(cod: number): Promise<Bono | null> {
+  async findBonoByCodigo(cod: number): Promise<Resena | null> {
     return this.bonoRepository.findOne({ where: { id: cod } });
   }
 
-  async findAllBonosByUsuario(userID: number): Promise<Bono[]> {
+  async findAllBonosByUsuario(userID: number): Promise<Resena[]> {
     return this.bonoRepository.find({ where: { usuarioId: userID } });
   }
 

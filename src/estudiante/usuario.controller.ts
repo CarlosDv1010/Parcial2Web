@@ -7,26 +7,26 @@ import {
   Delete,
   ParseIntPipe,
 } from '@nestjs/common';
-import { UsuarioService } from './usuario.service';
+import { EstudianteService } from './estudiante.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
-import { Usuario } from './entities/usuario.entity';
+import { Estudiante } from './entities/estudiante.entity';
 
 @Controller('usuarios')
 export class UsuarioController {
-  constructor(private readonly usuarioService: UsuarioService) {}
+  constructor(private readonly usuarioService: EstudianteService) {}
 
   @Post()
   async crearUsuario(
     @Body() createUsuarioDto: CreateUsuarioDto,
-  ): Promise<Usuario> {
+  ): Promise<Estudiante> {
     return this.usuarioService.crearUsuario(createUsuarioDto);
   }
 
   @Get(':id')
   async findUsuarioById(
     @Param('id', ParseIntPipe) id: number,
-  ): Promise<Usuario | null> {
-    return this.usuarioService.findUsuarioById(id);
+  ): Promise<Estudiante | null> {
+    return this.usuarioService.findEstudianteById(id);
   }
 
   @Delete(':id')
