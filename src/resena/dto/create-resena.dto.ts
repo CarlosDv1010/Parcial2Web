@@ -1,24 +1,25 @@
-import { IsInt, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsInt, IsNotEmpty, IsString, Max, Min } from 'class-validator';
 
 export class CreateResenaDTO {
-  @IsInt()
-  @IsNotEmpty()
-  calificacion: number;
-
   @IsString()
   @IsNotEmpty()
   comentario: string;
+
+  @IsInt()
+  @IsNotEmpty()
+  @Min(1)
+  @Max(5)
+  calificacion: number;
 
   @IsString()
   @IsNotEmpty()
   fecha: string;
 
-  @IsOptional()
   @IsInt()
-  actividadid?: number;  
+  @IsNotEmpty()
+  actividadId: number;
 
-  @IsOptional()
   @IsInt()
-  estudianteid?: number; 
- 
+  @IsNotEmpty()
+  estudianteId: number;
 }

@@ -1,11 +1,7 @@
 import {
   Controller,
-  Get,
   Post,
   Body,
-  Param,
-  Delete,
-  ParseIntPipe,
 } from '@nestjs/common';
 import { ResenaService } from './resena.service';
 import { CreateResenaDTO } from './dto/create-resena.dto';
@@ -15,4 +11,8 @@ import { Resena } from './entities/resena.entity';
 export class ResenaController {
   constructor(private readonly resenaService: ResenaService) {}
 
+  @Post()
+  async agregarResena(@Body() createResenaDto: CreateResenaDTO): Promise<Resena> {
+    return this.resenaService.agregarResena(createResenaDto);
+  }
 }

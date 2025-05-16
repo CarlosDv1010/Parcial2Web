@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty, IsInt, IsOptional } from 'class-validator';
+import { IsString, IsNotEmpty, IsInt, IsOptional, Min } from 'class-validator';
 
 export class CreateActividadDTO {
   @IsString()
@@ -12,6 +12,10 @@ export class CreateActividadDTO {
   @IsInt()
   @IsNotEmpty()
   calificacion: number;
+
+  @IsInt()
+  @IsNotEmpty()
+  cupoMaximo: number;
 
   @IsOptional()
   @IsInt({ each: true })

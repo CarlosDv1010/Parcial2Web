@@ -1,6 +1,6 @@
-import { IsString, IsNotEmpty, IsEnum, IsOptional, IsInt } from 'class-validator';
-export class CreateEstudianteDto {
+import { IsEmail, IsInt, IsNotEmpty, IsString, Max, Min } from 'class-validator';
 
+export class CreateEstudianteDto {
   @IsInt()
   @IsNotEmpty()
   cedula: number;
@@ -9,23 +9,17 @@ export class CreateEstudianteDto {
   @IsNotEmpty()
   nombre: string;
 
+  @IsEmail()
   @IsNotEmpty()
-  @IsString()
   correo: string;
 
-  @IsNotEmpty()
   @IsString()
+  @IsNotEmpty()
   programa: string;
 
-  @IsNotEmpty()
   @IsInt()
+  @IsNotEmpty()
+  @Min(1)
+  @Max(10)
   semestre: number;
-
-  @IsOptional()
-  @IsInt({ each: true })
-  actividadesids?: number[];  
-
-  @IsOptional()
-  @IsInt({ each: true })
-  resenasids?: number[]; 
 }

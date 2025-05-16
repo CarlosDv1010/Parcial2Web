@@ -5,13 +5,15 @@ import {
   ManyToOne,
   OneToMany,
   JoinColumn,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm';
 import { Estudiante } from '../../estudiante/entities/estudiante.entity';
 import { Resena } from '../../resena/entities/resena.entity';
 
 @Entity()
 export class Actividad {
-  @PrimaryGeneratedColumn('increment')
+  @PrimaryGeneratedColumn({ type: 'integer' })
   id: number;
 
   @Column()
@@ -20,23 +22,20 @@ export class Actividad {
   @Column()
   fecha: string;
 
-
   @Column()
   calificacion: number;
 
   @Column()
-  cupos: number;
+  cupoMaximo: number;
 
   @Column()
   estado: number;
 
-  @ManyToOne(() => Estudiante, (usuario) => usuario.actividades, { nullable: false })
-  @JoinColumn({ name: 'inscritosIds' })
+  @ManyToMany(() => Estudiante, (estudiante) => estudiante.actividades)
+  @JoinTable()
   inscritos: Estudiante[];
 
-  @Column({ name: 'profesorId' })
-  profesorId: number;
 
-  @OneToMany(() => Resena, (bono) => bono.actividad)
+  @OneToMany(() => Resena, (resena) => resena.actividad)
   resenas: Resena[];
 }
