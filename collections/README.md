@@ -1,5 +1,6 @@
 ### 🧪 Pruebas realizadas en Postman
 
+Recordar importar el ambiente de postman para tener la variable BASE_URL disponible.
 Se crearon pruebas automatizadas en Postman para validar los servicios principales del API. Las pruebas incluyeron:
 
 - Verificar que los códigos de estado sean los esperados (200, 201, etc.)
