@@ -9,4 +9,4 @@ import { Actividad } from './entities/actividad.entity';
   controllers: [ActividadController],
   providers: [ActividadService],
 })
-export class ClaseModule {}
+export class ActividadModule {}

@@ -3,10 +3,10 @@ import { ResenaService } from './resena.service';
 import { ResenaController } from './resena.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Resena } from './entities/resena.entity';
-import { UsuarioModule } from '../estudiante/estudiante.module';
+import { EstudianteModule } from '../estudiante/estudiante.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Resena]), UsuarioModule],
+  imports: [TypeOrmModule.forFeature([Resena]), EstudianteModule],
   controllers: [ResenaController],
   providers: [ResenaService],
 })
