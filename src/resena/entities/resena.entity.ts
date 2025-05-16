@@ -31,4 +31,6 @@ export class Resena {
   @JoinColumn({ name: 'actividadId' })
   actividad: Actividad;
 
+  
+
 }

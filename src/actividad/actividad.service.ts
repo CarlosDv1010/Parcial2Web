@@ -20,8 +20,9 @@ export class ActividadService {
     return this.actividadRepository.save(nuevaActividad);
   }
 
-  async findAllActividadesByDate(date: String){
-
-    const actividaddes = this.actividadRepository.find();
+  async findAllActividadesByDate(fecha: string): Promise<Actividad[]> {
+    return this.actividadRepository.find({
+      where: { fecha },
+    });
   }
 }

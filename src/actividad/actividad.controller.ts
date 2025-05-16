@@ -10,6 +10,6 @@ import { ActividadService } from './actividad.service';
 
 @Controller('clases')
 export class ActividadController {
-  constructor(private readonly claseService: ActividadService) {}
+  constructor(private readonly actividadService: ActividadService) {}
 
 }

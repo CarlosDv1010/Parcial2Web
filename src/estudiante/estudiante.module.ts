@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { EstudianteService } from './estudiante.service';
-import { UsuarioController } from './usuario.controller';
+import { UsuarioController } from './estudiante.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Estudiante } from './entities/estudiante.entity';
 
